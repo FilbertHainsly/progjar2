@@ -28,9 +28,11 @@ class ProcessTheClient(threading.Thread):
 
                 if text == 'TIME':
                     now = datetime.now()
-                    time_string = now.strftime("%H:%M:%S")
-                    response = f"JAM {time_string}\r\n"
+                    waktu = now.strftime("%d %m %Y %H:%M:%S")
+                    response = f"JAM {waktu}\r\n"
                     self.connection.sendall(response.encode('utf-8'))
+                elif text == 'QUIT':
+                    logging.warning(f"Connection closed by client: {self.address}")
                 elif text == 'QUIT':
                     logging.warning(f"Connection closed by client: {self.address}")
                     break
