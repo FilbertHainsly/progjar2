@@ -12,8 +12,6 @@ def client_thread(name, delay):
         response = s.recv(1024).decode('utf-8')
         print(f"[{name}] Received: {response.strip()}")
 
-        time.sleep(delay)  # Simulasi client nunggu
-
         s.sendall(b"QUIT\r\n")
         s.close()
         print(f"[{name}] Disconnected")
@@ -22,7 +20,7 @@ def client_thread(name, delay):
 
 def main():
     threads = []
-    for i in range(3):
+    for i in range(2):
         t = threading.Thread(target=client_thread, args=(f"Client-{i+1}", 5))
         t.start()
         threads.append(t)
